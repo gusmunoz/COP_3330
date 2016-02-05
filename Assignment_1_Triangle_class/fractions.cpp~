@@ -1,0 +1,64 @@
+#include <iostream>
+
+
+using namespace std;
+
+class Triangle
+{
+
+        public:            
+		Triangle(int size);		//constructor
+		
+		// accessors
+		GetSize();
+		
+		
+		Perimeter();
+		Area();
+		
+		Grow();
+		Shrink();
+		
+		SetBorder();
+		SetFill;
+		
+		Draw();
+		
+		Summary();
+		
+                
+	private:
+		int sideLength;
+  
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

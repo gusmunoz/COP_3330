@@ -1,0 +1,181 @@
+#include "triangle.h"
+#include <iostream>
+#include <math.h>
+
+#define numSides 3
+
+using namespace std;
+//constructor for the class Triangle
+Triangle::Triangle(int size, char border, char fill){
+    borderChar = border;
+    fillChar = fill;
+	
+	if (size < 1) {
+	    size = 1;
+	}
+	else if (size > 39) {
+	    size = 39;
+	}
+	else {
+		  
+	}
+    sideLength = size;
+}  
+//Size of triangle side
+int Triangle::GetSize()
+{
+
+    return sideLength;
+  
+}
+//Perimeter of triangle
+int Triangle::Perimeter()
+{
+  
+    return (sideLength*numSides);
+      
+}
+//Area of triangle     
+double Triangle::Area()
+{
+
+    double s = static_cast<double>(sideLength);
+    return ((sqrt(3)/4.0)*pow(s, 2));
+  
+}
+//Incremental growth of triangle
+void Triangle::Grow()
+{
+
+    if((sideLength >= 1) && (sideLength < 39))
+      ++sideLength;
+      
+}
+//Incremental shrinking of triangle
+void Triangle::Shrink()
+{
+
+if((sideLength > 1) && (sideLength < 40)){
+      --sideLength;
+    }
+     
+}
+//Border characters for triangle
+void Triangle::SetBorder(char border)
+{				
+  if (border > 33 && border < 126){
+    borderChar = border;
+   }
+   else
+   {
+     borderChar = '#';
+   }
+}
+//Fill characters for triangle
+void Triangle::SetFill(char fill){
+    {				
+  if (fill > 33 && fill < 126){
+    fillChar = fill;
+   }
+   else
+   {
+     fillChar = '*';
+   }
+}
+  
+}
+// ---------------------------- DRAW FUNCTION ----------------------------- //
+void Triangle::Draw(){
+//if length of side is 1 then just print a border character
+  if(sideLength == 1)
+  {
+    cout << borderChar;
+    return;
+  }
+
+//first row of triangle is 1 char
+int numFillChars(1);  
+  
+
+  for(int i = 1; i <= sideLength; i++) 
+  { 
+//1st inner loop prints spaces for the left side of the triangle     
+    for(int j = sideLength-1; j >=i; j--)
+    {
+      cout << " ";
+    }
+//2nd inner loop prints triangle positions with border or fill    
+    for(int k = 0; k < numFillChars; ++k)
+    {
+//deterimine if position is a fill or a border position on current line      
+      if(k > 0 && k < numFillChars-1)
+      {
+	if(i==sideLength)
+	{
+	  cout << borderChar;
+	}
+	else
+	{
+	  cout << fillChar;
+	}
+      }
+	else
+	{
+	  cout << borderChar;
+	}
+      	
+      }
+//new line
+    cout << endl;
+//each row in triangle has 2 more characters  
+numFillChars +=2;  
+  }
+}
+//Summary of work
+void Triangle::Summary(){
+
+cout << "Size of triangles side = " << sideLength << "\n";
+cout << "Perimeter of triangle = " << sideLength*numSides << "\n";
+cout << "Area of triangle = " << (sqrt(3)/4.0)*pow(sideLength, 2) << "\n";
+cout << "Triangle looks like:\n";
+Draw();
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
