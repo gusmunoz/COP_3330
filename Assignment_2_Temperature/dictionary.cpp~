@@ -1,0 +1,138 @@
+#include <fstream>
+#include <iostream>
+#include <set>
+#include <vector>
+
+
+using namespace std;
+
+class Dictionary{
+
+        public:
+                ifstream *ifs;				//declaring variables and pointers
+		set<string> dictSet; 			//
+		set<string>::iterator dictEnd;		//
+		
+                Dictionary(string fileLocation){	//constructor which initializes both objects in main
+	      
+			ifs = new ifstream(fileLocation, ifstream::in); //the "new" operator returns the memory location of the new
+                        string str;					// instantiated class
+									
+			while ((*ifs) >> str){
+                                dictSet.insert(str);
+                        }
+                        
+                        dictEnd = dictSet.end();
+                } 
+                
+                void printSelf(){			//print to screen dictionary word
+                        for (set<string>::iterator it = dictSet.begin()  ; it!=dictSet.end()  ; it++  ){
+                                cout << ' ' << *it << endl;
+			}
+                }
+
+};
+
+//What calls main()? Bash calls main() and passes it 2 arguments: argc & argv. argv is an array of char pointers to char arrays and argc
+// is the length of argv. The 1st entry in argv points to a char array that stores the name of the program such as "spell_checker" then 
+// the rest of the entries point to char arrays that store the words that you typed in after the name of the program 
+int main(int argc, char* argv[]) {			//arguments to the "main" fxn
+
+
+        Dictionary usrdict("/usr/share/dict/words");	//dictionaries in system
+	Dictionary usrdict2("/home/gus/_Dictionary");
+	
+	vector<string> inputFile; 			//reading in the input file 
+	
+        ifstream ifs(argv[1], ifstream::in);
+        string str;
+	
+        while (ifs >> str){
+
+                inputFile.push_back(str);
+		
+        }
+        
+        set<string>::iterator finder;
+	
+        for (vector<string>::iterator it=inputFile.begin(); it!=inputFile.end(); it++){ //check word against dic
+
+                finder = usrdict.dictSet.find(*it);
+
+		if(finder == usrdict.dictEnd){
+                        cout << *it << endl;
+			
+			//New work for replacing incorrect word
+			string user_input;
+			getline(cin,user_input);
+
+			//if (user_input[0] == 's') { 
+			//	replace(inputFile[*it], inputFile[*it], user_input[1], user_input[2]);
+
+			//user wants to substitute correction for this instance of mispelled word.
+			//just replace word the current word in the vector with the user_input[2]...user_input[n].
+			//http://www.cplusplus.com/reference/algorithm/replace/
+			//note for this use case the first and last position will be the same
+  
+			//}
+			if (user_input[0] == 'S' ) {
+				inputFile.replace(inputFile.begin(), inputFile.end(), user_input[1], user_input[2]);
+			//do the same thing as above, using the same replace, except with first and last position being the beginning
+			//and end of the inputFile vector
+  
+			}
+			else (user_input[0] == 'i' ) {
+				return 0;
+			//easy. 
+			//continue;
+			}
+			//else if (user_input[0] == 'I' ) {
+			//the easiest way to do this one is create another set set<string> ignored_words. then insert words that the user wants to "globally" ignore mispellings of
+			//into this new set and check again membership in that set each time you look at a word. if *it is a member of ignored_words then continue;
+  
+			//}
+			//else (user_input[0] == 'a' ) {
+			//just instantiate both the _Dictionary dictionary and the /usr/dict/blah blah blah dictionary and check against both of them. if this input is 
+			//chosen then add to the _Dictionary dictionary and from then on checks will pass
+  
+			//}
+		    
+		}
+
+        }
+       
+        return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
