@@ -1,0 +1,132 @@
+// Main program to test class Student
+// and its derived classes.
+
+#include <iostream>		// for cin, cout
+#include <fstream>
+#include <string>
+#include <cstdlib>
+#include "student.h"		// for Student classes
+
+using namespace std;
+
+// Container space allocator ----------------------------------------------------
+Student* newArray(int space)
+{
+  Student* oldArray = NULL;
+  oldArray = new (nothrow) Student[space];
+  if (oldArray == 0)
+  {
+    cout << "Failed!\n";
+  }
+  else
+  {
+    cout << "Succeeded!\n"; 
+  }
+    return oldArray;
+}
+
+// Request a change in capacity -------------------------------------------------
+// void reserve(int newCapacity)
+// {
+//   if (containerSize > newCapacity)
+//   {
+//     cout << "Error: Current container size is larger than requested capacity\n";
+//     exit(EXIT_FAILURE);
+//   }
+//   if (containerCapacity == newCapacity)
+//   {
+// 	return;
+//   }
+//   else
+//   {
+//     if (containerCapacity > newCapacity)
+//     {
+//       return;
+//     }
+//     else
+//     {
+//       T *oldArray = array;
+//       array = newArray(newCapacity);
+//       for (int i=0; i < size(); i++)
+//       {
+// 	array[i] = oldArray[i];
+//       }
+//       containerCapacity = newCapacity;
+//       delete [] oldArray;
+//     }
+//   }
+// }
+
+using namespace std;
+
+int main()
+{
+    cout << "Please enter the name of the input file." << '\n';
+    cout << "Filename: ";
+    string inputFileName;		//name of text file
+    cin >> inputFileName;
+    
+    ifstream inputFile;
+    inputFile.open(inputFileName);
+    if(!inputFile){
+	cout << "Incompatible file. Check file extension." << endl;
+	exit(0);
+    }
+    else{
+      int numStudents = -1;
+      inputFile >> numStudents;
+      
+      if (numStudents <= 0) {
+	//nothing to do
+	//return;
+      }
+      
+      Student* studentList = newArray(numStudents);
+      int i = 0;
+      
+      //main loop reads 2 lines representing student each iteration
+      while (!inputFile.eof()) {
+	String line1 = "";
+	String line2 = "";
+	string firstName,
+	       lastName,
+	       subject;
+	getline(inputFile, line1);
+	getline(inputFile, line2);
+	
+	//parse line1 and 2
+	//line contains lastName, firstName
+	//line 2 contains ...
+	
+	//store parsed fields from line 1 and 2 into Student instance
+	Student student(firstName, lastName, subject);
+	
+	//store in studeList
+	studentList[i] = student;
+	i++;
+      }
+      
+      //studentList initialized
+/*      Biology bioStudent = (Biology)studentList[0];
+      bioStudent.finalGrade(); //calls the Biology class finalGrade at runtime b/c of virtual function*/ 
+    }
+    
+    cout << "Please enter the name of the output file." << '\n';
+    cout << "Filename: ";
+    string outputFileName;		//name of text file
+    cin >> outputFileName;
+    
+    ofstream outputFile;
+    inputFile.open(outputFileName);
+    
+  
+  
+    cout << "Processing Complete." << '\n';
+    
+  
+  
+  
+  
+};
+
+

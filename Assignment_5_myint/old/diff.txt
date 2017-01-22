@@ -1,0 +1,60 @@
+178c178,179
+<     MyInt s((x.capacity<y.capacity)?y:x); //array which is the size of larger of both arrays
+---
+>     MyInt s((x.size<y.size)?y:x); //array which is the size of larger of both arrays
+>     //MyInt s(0);
+184a186,187
+>         int operand1(0);
+>         int operand2(0);
+186c189,196
+<         if((columnTotal = remainder + C2I(x.array[i])+C2I(y.array[i])) > 9){
+---
+>         if (i < x.size) {
+>           operand1 = C2I(x.array[i]);
+>         }
+>         if (i < y.size) {
+>           operand2 = C2I(y.array[i]);
+>         }
+> 
+>         if((columnTotal = remainder + operand1 + operand2) > 9){
+207c217
+<     MyInt c(a.capacity+k,'0');
+---
+>     MyInt c(a);
+211a222,229
+>     if (k==0) {
+>       c.array[c.size] = '0';
+>     }
+>     else if (k>0){
+>       c.array[0] = '0';
+>     }
+>     c.size++;
+>     int j=3;
+217c235
+<     MyInt s(x.capacity+1,'0');
+---
+>     MyInt s(x);
+240c258
+< 	s.size++;
+---
+> 	      s.size++;
+250c268,271
+<     MyInt c((x.capacity<y.capacity)?2*y.capacity:2*x.capacity,'0'); //initialized to all zeroes
+---
+>     //MyInt c((x.capacity<y.capacity)?2*y.capacity:2*x.capacity,'0'); //initialized to all zeroes
+>     MyInt c(0);
+>     MyInt maxDigitOperand( x.size > y.size ? x : y);
+>     MyInt minDigitOperand( x.size > y.size ? y : x); 
+252,254c273,275
+<     for (i=0; i < y.size; i++) {
+<         if (C2I(y.array[i]) != 0) { //if it is zero, nothing to do
+<             c = c + lshift(multiplyOneByMany(x,y.array[i]), i);
+---
+>     for (i=0; i < minDigitOperand.size; i++) {
+>         if (C2I(maxDigitOperand.array[i]) != 0) { //if it is zero, nothing to do
+>             c = c + lshift(multiplyOneByMany(maxDigitOperand,minDigitOperand.array[i]), i);
+255a277,280
+>     }
+> 
+>     if (minDigitOperand.size == 1){
+>       c.size--;
