@@ -33,17 +33,13 @@ Triangle::Triangle(int size, char border, char fill){
 // GetSize() - getter to retrieve length of triangle size
 int Triangle::GetSize()
 {
-
     return sideLength;
-  
 }
 
 // Perimeter() - compute perimeter of triangle
 int Triangle::Perimeter()
 {
-  
     return (sideLength*numSides);
-      
 }
      
 // Area() - compute area to 2 decimal places(double)  
@@ -58,7 +54,6 @@ double Triangle::Area()
 // Grow() - increment side length of triangle; respecting length limits
 void Triangle::Grow()
 {
-
     if((sideLength >= 1) && (sideLength < 39))
 	++sideLength;
       
@@ -67,7 +62,6 @@ void Triangle::Grow()
 // Shrink() - decrement side length of triangle; respecting length limits
 void Triangle::Shrink()
 {
-
     if((sideLength > 1) && (sideLength < 40)){
 	--sideLength;
     }
@@ -75,19 +69,21 @@ void Triangle::Shrink()
 }
 
 // SetBorder - set border char (change after initial border char type made during obj initialization)
-void Triangle::SetBorder(char border){
+void Triangle::SetBorder(char border)
+{
     borderChar = border;
-  
+
 }
 
 // SetFill - set fill char (change after initial border char type made during obj initialization)
-void Triangle::SetFill(char fill){
+void Triangle::SetFill(char fill)
+{
     fillChar = fill;
   
 }
 // Draw() - draw triangle
-void Triangle::Draw(){
-
+void Triangle::Draw()
+{
     if(sideLength == 1){
 	cout << borderChar;
 	return;

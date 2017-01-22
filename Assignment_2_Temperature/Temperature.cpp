@@ -101,21 +101,21 @@ void Temperature::Show() const
     int oldprecision = cout.precision();
   
     if (Format == 'D'){
-      cout << temp << ' ' << scale << endl;
+	cout << temp << ' ' << scale << endl;
     }
     else if (Format == 'P'){
-      cout << temp << setprecision(1) << ' ' << scale << endl;
+	cout << temp << setprecision(1) << ' ' << scale << endl;
     }
     else if (Format == 'L'){
 	string word = "";
 	if (scale == 'k' || scale == 'K'){
-	  word = "Kelvin";
+	    word = "Kelvin";
 	}
 	if (scale == 'c' || scale == 'C'){
-	  word = "Celsius";
+	    word = "Celsius";
 	}
 	if (scale == 'f' || scale == 'F'){
-	  word = "Faranheit";
+	    word = "Faranheit";
 	}
 	cout << temp << ' ' << word << endl;     
     }
@@ -262,5 +262,3 @@ int Temperature::Compare(const Temperature& d)
 	return 1;
     }
 }
-
-

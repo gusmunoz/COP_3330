@@ -168,17 +168,17 @@ ostream &operator<<(ostream &output, const Distance &D)
 {
     output.fill('0');
     if (D.miles == 0){
-      if(D.yards == 0){
-	if(D.feet == 0){
-	    output << "(" << D.inches << '"' << ")" << endl;
+	if(D.yards == 0){
+	    if(D.feet == 0){
+		output << "(" << D.inches << '"' << ")" << endl;
+	    }
+	    else{
+		output << "(" << D.feet << "' " << D.inches << '"' << ")" << endl;
+	    }
 	}
 	else{
-	    output << "(" << D.feet << "' " << D.inches << '"' << ")" << endl;
+	    output << "(" << D.yards << "y " << D.feet << "' " << D.inches << '"' << ")" << endl;
 	}
-      }
-      else{
-	  output << "(" << D.yards << "y " << D.feet << "' " << D.inches << '"' << ")" << endl;
-      }
     }
     else{
 	output << "(" << D.miles << "m " << D.yards << "y " << D.feet << "' " << D.inches << '"' << ")" << endl;
